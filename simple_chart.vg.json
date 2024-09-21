@@ -1,0 +1,44 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "Population Change (2022 - 2023) by LGA",
+    "width": 800,
+    "height": 800,
+    "projection": {
+      "type": "mercator"
+    },
+    "data": {
+      "url": "LGA_2024_AUST_GDA2020.json",
+      "format": {
+        "type": "topojson",
+        "feature": "LGA_2024_AUST_GDA2020"
+      }
+    },
+    "transform": [
+      {
+        "lookup": "properties.LGA_NAME24",
+        "from": {
+          "data": {
+            "url": "PopChangeByLGA.csv"
+          },
+          "key": "Local Government Area",
+          "fields": [
+            "Percentage Change"
+          ]
+        }
+      }
+    ],
+    "mark": {
+      "type": "geoshape"
+    },
+    "encoding": {
+      "color": {
+        "field": "Percentage Change",
+        "type": "quantitative"
+      },
+      "tooltip": [
+            {"field": "properties.LGA_NAME24", "type": "nominal", "title": "Local Government Area"},
+            {"field": "Percentage Change", "type": "quantitative"}
+        ]
+    }
+    
+  }
