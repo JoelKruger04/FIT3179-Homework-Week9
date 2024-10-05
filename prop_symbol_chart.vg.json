@@ -1,0 +1,96 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 800,
+  "height": 800,
+  "title": "Patronage of Train Stations in Melbourne",
+  "projection": {
+    "type": "mercator",
+    "center": {"expr": "center_to"},
+    "scale": {"expr": "zoom_level"}
+  },
+  "params":[
+    {
+      "name": "center_to",
+      "value": [144.96, -37.81],
+      "bind": {
+        "input": "select",
+        "options": [
+          [144.96, -37.81],
+          [145.134, -37.914],
+          [144.84, -37.67],
+          [144.833, -37.781],
+          [145, -37.952]
+        ],
+        "labels": ["Melbourne CBD", "Monash Clayton", "Melbourne Airport", "Sunshine", "Sandringham"],
+        "name": "Map Center: "
+      }
+    },
+    {
+      "name": "zoom_level",
+      "value": 200000,
+      "bind": {
+        "input": "range",
+        "min": 40000,
+        "max": 500000,
+        "step": 100,
+        "name": "Zoom: "
+      }
+    }
+  ],
+  "layer": [
+    {
+      "data": {
+        "url": "output.json",
+        "format": {
+          "type": "topojson",
+          "feature": "LGA_2024_AUST_GDA2020"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "lightgray",
+        "stroke": "white"
+      }
+    },
+    {
+      "data": {
+        "url": "Annual_Metropolitan_Train_Station_Entries_2023-24.csv"
+      },
+      "mark": {
+        "type": "circle",
+        "tooltip": {
+          "content": "data"
+        }
+      },
+      "encoding": {
+        "longitude": {
+          "field": "Stop_long",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "Stop_lat",
+          "type": "quantitative"
+        },
+        "size": {
+          "field": "Pax_weekday",
+          "type": "quantitative",
+          "title": "Weekday Patronage",
+          "scale": {
+            "type": "sqrt"
+          }
+        },
+        "color": {
+          "field": "Pax_weekday",
+          "type": "quantitative",
+          "title": "Weekday Patronage",
+          "scale": {"domain": [0, 60000], "scheme": "reds", "type": "sqrt"},
+          "legend": {"format": ".2s"}
+        },
+        "tooltip": [
+            {"field": "Stop_name", "type": "nominal", "title": "Stop Name"},
+            {"field": "Pax_weekday", "type": "quantitative", "title": "Annual Patronage"}
+        ]
+      }
+    }
+  ]
+}

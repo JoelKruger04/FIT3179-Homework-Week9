@@ -7,7 +7,7 @@
       "type": "mercator"
     },
     "data": {
-      "url": "LGA_2024_AUST_GDA2020.json",
+      "url": "output.json",
       "format": {
         "type": "topojson",
         "feature": "LGA_2024_AUST_GDA2020"
