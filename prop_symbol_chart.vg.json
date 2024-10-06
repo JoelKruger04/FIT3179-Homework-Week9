@@ -38,6 +38,7 @@
     }
   ],
   "layer": [
+    
     {
       "data": {
         "url": "output.json",
@@ -88,7 +89,44 @@
         },
         "tooltip": [
             {"field": "Stop_name", "type": "nominal", "title": "Stop Name"},
-            {"field": "Pax_weekday", "type": "quantitative", "title": "Annual Patronage"}
+            {"field": "Pax_weekday", "type": "quantitative", "title": "Weekday Patronage"}
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "Annual_Metropolitan_Train_Station_Entries_2023-24.csv"
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 11.5,
+        "dy": 15,
+        "tooltip": {
+          "content": "data"
+        }
+      },
+      "encoding": {
+        "longitude": {
+          "field": "Stop_long",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "Stop_lat",
+          "type": "quantitative"
+        },
+
+        "text": {"field": "Stop_name", "type": "nominal"},
+        "color": { "value": "black" },
+        "opacity": {
+          "condition": {
+            "test": "datum['Stop_name'] == 'Flinders Street' || datum['Stop_name'] == 'Richmond' || datum['Stop_name'] == 'Caulfield' || datum['Stop_name'] == 'Clayton' || datum['Stop_name'] == 'Pakenham' || datum['Stop_name'] == 'Cranbourne' || datum['Stop_name'] == 'Dandenong' || datum['Stop_name'] == 'Cheltenham' || datum['Stop_name'] == 'Glen Waverley' || datum['Stop_name'] == 'Frankston' || datum['Stop_name'] == 'Stony Point' || datum['Stop_name'] == 'Clifton Hill' || datum['Stop_name'] == 'Footscray' || datum['Stop_name'] == 'Essendon' || datum['Stop_name'] == 'North Melbourne'|| datum['Stop_name'] == 'Sunbury'|| datum['Stop_name'] == 'Craigieburn'|| datum['Stop_name'] == 'Mernda'|| datum['Stop_name'] == 'Hurstbridge'|| datum['Stop_name'] == 'Newport'|| datum['Stop_name'] == 'Sandringham'|| datum['Stop_name'] == 'Ringwood'|| datum['Stop_name'] == 'Belgrave'|| datum['Stop_name'] == 'Lilydale'|| datum['Stop_name'] == 'Sunshine'|| datum['Stop_name'] == 'Camberwell'|| datum['Stop_name'] == 'Werribee'|| datum['Stop_name'] == 'Watergardens'|| datum['Stop_name'] == 'Upfield'",
+            "value": 1
+          },
+          "value": 0
+        },
+        "tooltip": [
+            {"field": "Stop_name", "type": "nominal", "title": "Stop Name"},
+            {"field": "Pax_weekday", "type": "quantitative", "title": "Weekday Patronage"}
         ]
       }
     }
