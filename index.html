@@ -1,19 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
-<script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
-<script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
-<script src="vega_lite_vis.js"></script>
-<title>Population Change</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+  <script src="vega_lite_vis.js"></script>
+  <title>Melbourne Public Transport</title>
+
+  <!-- Import pure.css -->
+  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css"
+    integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Google font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+  <!-- CSS file -->
+  <link rel="stylesheet" type="text/css" href="styles.css" media="all">
+
 </head>
 <body>
-<h1>Population Change</h1>
-<div id="simple_chart"></div>
-<div id="prop_symbol_chart"></div>
-<div id="bar_chart"></div>
+<h1></h1>
+
+<div class="page">
+<!-- pure grid group -->
+<div class="pure-g">
+<div class="pure-u-1-1">
+<h1>The Future of Public Transport in Melbourne</h1>
+<p>Present, past and future usage of public transport within greater Melbourne</p>
+</div>
+</div>
+<!-- end pure grid group -->
+
+<div class="pure-g">
+<div class="pure-u-3-5">
+<div class="description description-left">
+<h2>Types of Public Transport</h2>
+<p>Melbourne has a range of public transport options, including trains, trams, buses, and coaches. Trains connect suburbs to the city, trams help people get around urban areas, and buses serve places not covered by the others. However, public transport usage is still lower than in 2019 because more people are working from home and travel habits have changed. This has led to talks about how to make the system better for today's commuters.</p>
+</div>
+</div>
+<div class="pure-u-2-5">
+<div id="bar_chart" class="vis-container"></div>
+</div>
+</div>
+
+<!-- pure grid group -->
+<div class="pure-g">
+<div class="pure-u-4-5">
+<div id="prop_symbol_chart" class="vis-container" style="width: 60.5%;"></div>
+</div>
+<div class="pure-u-1-5">
+<div class="description description-right">
+<h2>Train Stops</h2>
+<p>The map shows the usage of each train station in Melbourne, overlayed in front of the population growth for that region.</p>
+</div>
+</div>
+
+</div>
+<!-- end pure grid group -->
+
+</div>
+
 </body>
 </html>

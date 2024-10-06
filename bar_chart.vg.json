@@ -1,12 +1,69 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "title": { "text": "Train Trips" },
     "data": {
-        "url": "Trips.csv"
+      "url": "Trips.csv",
+      "format": {
+        "type": "csv"
+      }
     },
+    "params": [
+        {
+            "name": "Year_selection",
+            "value": 2024,
+            "bind": {
+                "input": "range",
+                "min": 2018,
+                "max": 2024,
+                "step": 1,
+                "name": "Year: "
+            }
+        }
+    ],
+    "transform": [
+      {
+        "filter": "datum['Year'] == Year_selection"
+      },
+      {
+        "filter": {
+          "field": "Month",
+          "equal": 1
+        }
+      },
+      {
+        "fold": [
+          "Metropolitan train",
+          "Metropolitan tram",
+          "Metropolitan bus",
+          "Regional train",
+          "Regional coach",
+          "Regional bus"
+        ],
+        "as": ["Transport Type", "Value"]
+      }
+    ],
     "mark": "bar",
     "encoding": {
-    "x": { "field": "Year", "type": "nominal" },
-    "y": { "field": "Metropolitan train", "type": "quantitative" }
+      "x": {
+        "field": "Transport Type",
+        "type": "ordinal",
+        "title": "Transport Type"
+      },
+      "y": {
+        "field": "Value",
+        "type": "quantitative",
+        "title": "Value",
+        "scale": {
+            "domain": [0, 18000000]
+        }
+      },
+      "color": {
+        "field": "Transport Type",
+        "type": "nominal",
+        "title": "Transport Type"
+      },
+      "tooltip": [
+        {"field": "Transport Type", "type": "nominal", "title": "Transport Type"},
+        {"field": "Value", "type": "quantitative", "title": "Monthly Passengers"}
+    ]
     }
-}
+  }
