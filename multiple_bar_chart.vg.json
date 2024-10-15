@@ -1,0 +1,84 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 475,
+  "height": 250,
+  "padding": 58,
+  "title": { "text": "Australia's Journey to Work", "fontSize": 18 },
+  "data": {
+    "values": [
+      { "category": "Car (driver)", "group": "2016", "value": 62 },
+      { "category": "Car (driver)", "group": "2021", "value": 53.1 },
+      { "category": "Worked from home", "group": "2016", "value": 4.7 },
+      { "category": "Worked from home", "group": "2021", "value": 21 },
+      { "category": "Train", "group": "2016", "value": 7.2 },
+      { "category": "Train", "group": "2021", "value": 2.5 },
+      { "category": "Car (passenger)", "group": "2016", "value": 4.6 },
+      { "category": "Car (passenger)", "group": "2021", "value": 3.9 },
+      { "category": "Walked", "group": "2016", "value": 3.5 },
+      { "category": "Walked", "group": "2021", "value": 2.5 },
+      { "category": "Bus", "group": "2016", "value": 3.5 },
+      { "category": "Bus", "group": "2021", "value": 1.8 },
+      { "category": "Bike", "group": "2016", "value": 1 },
+      { "category": "Bike", "group": "2021", "value": 0.7 },
+      { "category": "Tram", "group": "2016", "value": 0.6 },
+      { "category": "Tram", "group": "2021", "value": 0.3 }
+    ]
+  },
+  "layer": [
+    {
+      "mark": "bar",
+      "encoding": {
+        "x": {
+          "field": "category",
+          "title": "Transport Type",
+          "sort": "-color"
+        },
+        "y": {
+          "field": "value",
+          "type": "quantitative",
+          "title": "Percent of workers (%)"
+        },
+        "xOffset": { "field": "group" },
+        "color": { "field": "group", "title": "Census Year" },
+        "tooltip": [
+          {
+            "field": "category",
+            "type": "nominal",
+            "title": "Transport type"
+          },
+          {
+            "field": "group",
+            "title": "Year",
+            "type": "nominal"
+          },
+          {
+            "field": "value",
+            "title": "Percent of workers (%)",
+            "type": "quantitative"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "top",
+        "dx": 70,
+        "dy": 60,
+        "fontStyle": "normal",
+        "fontWeight": "normal",
+        "fontSize": 16,
+        "lineBreak": "  ",
+        "color": "grey"
+      },
+      "encoding": {
+        "x": { "value": 0 },
+        "y": { "value": 0 },
+        "text": {
+          "value": "The majority of Australians  still drive to work"
+        }
+      }
+    }
+  ]
+}

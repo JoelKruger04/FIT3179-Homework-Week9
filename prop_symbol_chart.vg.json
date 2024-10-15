@@ -1,14 +1,14 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 550,
-  "height": 550,
-  "title": "Patronage of Train Stations in Melbourne",
+"title": {"text": "Train Stations and Population Growth - Concentrated in the CBD", "fontSize": 18},
+  "width": 1050,
+  "height": 400,
   "projection": {
     "type": "mercator",
-    "center": {"expr": "center_to"},
-    "scale": {"expr": "zoom_level"}
+    "center": { "expr": "center_to" },
+    "scale": { "expr": "zoom_level" }
   },
-  "params":[
+  "params": [
     {
       "name": "center_to",
       "value": [144.96, -37.81],
@@ -21,16 +21,22 @@
           [144.833, -37.781],
           [145, -37.952]
         ],
-        "labels": ["Melbourne CBD", "Monash Clayton", "Melbourne Airport", "Sunshine", "Sandringham"],
+        "labels": [
+          "Melbourne CBD",
+          "Monash Clayton",
+          "Melbourne Airport",
+          "Sunshine",
+          "Sandringham"
+        ],
         "name": "Map Center: "
       }
     },
     {
       "name": "zoom_level",
-      "value": 200000,
+      "value": 70000,
       "bind": {
         "input": "range",
-        "min": 40000,
+        "min": 25000,
         "max": 500000,
         "step": 100,
         "name": "Zoom: "
@@ -38,7 +44,7 @@
     }
   ],
   "resolve": {
-    "scale": {"color": "independent"}
+    "scale": { "color": "independent" }
   },
   "layer": [
     {
@@ -57,9 +63,7 @@
               "url": "PopChangeByLGA.csv"
             },
             "key": "Local Government Area",
-            "fields": [
-              "Percentage Change"
-            ]
+            "fields": ["Percentage Change"]
           }
         }
       ],
@@ -70,15 +74,22 @@
         "color": {
           "field": "Percentage Change",
           "type": "quantitative",
-          "title": "Percentage Change",
-          "scale": {"scheme": "blues"}
+          "title": "Population Growth 2023-2024",
+          "scale": { "scheme": "blues" }
         },
         "tooltip": [
-              {"field": "properties.LGA_NAME24", "type": "nominal", "title": "Local Government Area"},
-              {"field": "Percentage Change", "type": "quantitative"}
-          ]
-    }
-
+          {
+            "field": "properties.LGA_NAME24",
+            "type": "nominal",
+            "title": "Local Government Area"
+          },
+          {
+            "field": "Percentage Change",
+            "title": "Population Growth 2023-2024 (%)",
+            "type": "quantitative"
+          }
+        ]
+      }
     },
     {
       "data": {
@@ -102,21 +113,21 @@
         "size": {
           "field": "Pax_weekday",
           "type": "quantitative",
-          "title": "Weekday Patronage",
-          "scale": {
-            "type": "sqrt"
+          "title": "Train Station Patronage",
+          "bin": {
+            "nice": true,
+            "step": 15000
           }
         },
-        "color": {
-          "field": "Pax_weekday",
-          "type": "quantitative",
-          "title": "Weekday Patronage",
-          "scale": {"domain": [0, 60000], "scheme": "reds", "type": "sqrt"},
-          "legend": {"format": ".2s"}
-        },
+        "color": { "value": "black" },
         "tooltip": [
-            {"field": "Stop_name", "type": "nominal", "title": "Stop Name"},
-            {"field": "Pax_weekday", "type": "quantitative", "title": "Weekday Patronage"}
+          { "field": "Stop_name", "type": "nominal", "title": "Stop Name" },
+          {
+            "field": "Pax_weekday",
+            "type": "quantitative",
+            "title": "Weekday Patronage",
+            "formatType": "number"
+          }
         ]
       }
     },
@@ -142,7 +153,7 @@
           "type": "quantitative"
         },
 
-        "text": {"field": "Stop_name", "type": "nominal"},
+        "text": { "field": "Stop_name", "type": "nominal" },
         "color": { "value": "black" },
         "opacity": {
           "condition": {
@@ -152,8 +163,45 @@
           "value": 0
         },
         "tooltip": [
-            {"field": "Stop_name", "type": "nominal", "title": "Stop Name"},
-            {"field": "Pax_weekday", "type": "quantitative", "title": "Weekday Patronage"}
+          { "field": "Stop_name", "type": "nominal", "title": "Stop Name" },
+          {
+            "field": "Pax_weekday",
+            "type": "quantitative",
+            "title": "Train Station Patronage",
+            "format": ",.2r"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "srl_stations.csv"
+      },
+      "mark": {
+        "type": "circle",
+        "tooltip": {
+          "content": "data"
+        },
+        "size": 200
+      },
+      "encoding": {
+        "longitude": {
+          "field": "Stop_long",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "Stop_lat",
+          "type": "quantitative"
+        },
+        "color": {
+          "value": "darkorange"
+        },
+        "tooltip": [
+          {
+            "field": "Stop_name",
+            "type": "nominal",
+            "title": "Proposed SRL Station"
+          }
         ]
       }
     }

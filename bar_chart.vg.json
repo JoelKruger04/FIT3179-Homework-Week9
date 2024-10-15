@@ -1,69 +1,172 @@
 {
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "data": {
-      "url": "Trips.csv",
-      "format": {
-        "type": "csv"
-      }
-    },
-    "params": [
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "vconcat": [
+    {
+      "width": 475,
+      "height": 150,
+      "title": {"text": "Public Transport Usage Over Time", "fontSize": 18}
+      ,
+      "data": {
+        "url": "Trips.csv",
+        "format": {
+          "type": "csv"
+        }
+      },
+      "transform": [
         {
-            "name": "Year_selection",
-            "value": 2024,
-            "bind": {
-                "input": "range",
-                "min": 2018,
-                "max": 2024,
-                "step": 1,
-                "name": "Year: "
+          "filter": {
+            "field": "Month",
+            "equal": 6
+          }
+        },
+        {
+          "fold": [
+            "Train",
+            "Tram",
+            "Bus"
+          ],
+          "as": ["Transport Type", "Value"]
+        }
+      ],
+      "layer": [
+        {
+          "mark": "line",
+
+          "encoding": {
+            "x": {
+              "field": "Year",
+              "type": "ordinal",
+              "title": ""
+            },
+            "y": {
+              "field": "Value",
+              "type": "quantitative",
+              "title": "Number of Monthly Passengers"
+            },
+            "color": {
+              "field": "Transport Type",
+              "type": "nominal",
+              "title": "Transport Type"
             }
+          }
+        },
+        {
+          "mark": "circle",
+
+          "encoding": {
+            "x": {
+              "field": "Year",
+              "type": "ordinal",
+              "title": ""
+            },
+            "y": {
+              "field": "Value",
+              "type": "quantitative",
+              "title": "Number of Monthly Passengers"
+            },
+            "color": {
+              "field": "Transport Type",
+              "type": "nominal",
+              "title": "Transport Type"
+            },
+            "size": {
+              "value": 200
+            },
+            "tooltip": [
+              {
+                "field": "Transport Type",
+                "type": "nominal",
+                "title": "Transport Type"
+              },
+              {
+                "field": "Value",
+                "type": "quantitative",
+                "title": "Monthly Passengers",
+                "format": ".3s"
+              }
+            ]
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "align": "left",
+            "baseline": "top",
+            "dx": 150,
+            "dy": 3,
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+            "fontSize": 16,
+            "lineBreak": "  ",
+            "color": "grey"
+          },
+          "encoding": {
+            "x": { "value": 0 },
+            "y": { "value": 0 },
+            "text": { "value": "Fall in PTV usage during   COVID has not recovered" }
+          }
         }
-    ],
-    "transform": [
-      {
-        "filter": "datum['Year'] == Year_selection"
-      },
-      {
-        "filter": {
-          "field": "Month",
-          "equal": 1
+      ]
+    },
+    {
+      "data": {
+        "url": "melbpop.csv",
+        "format": {
+          "type": "csv"
         }
       },
-      {
-        "fold": [
-          "Metropolitan train",
-          "Metropolitan tram",
-          "Metropolitan bus",
-          "Regional train",
-          "Regional coach",
-          "Regional bus"
-        ],
-        "as": ["Transport Type", "Value"]
-      }
-    ],
-    "mark": "bar",
-    "encoding": {
-      "x": {
-        "field": "Transport Type",
-        "type": "ordinal",
-        "title": "Transport Type"
-      },
-      "y": {
-        "field": "Value",
-        "type": "quantitative",
-        "title": "Value",
-        "scale": {
-            "domain": [0, 18000000]
+      "width": 475,
+      "height": 100,
+      "layer": [
+        {
+          "mark": "line",
+
+          "encoding": {
+            "x": {
+              "field": "Year",
+              "type": "ordinal",
+              "title": "Year"
+            },
+            "y": {
+              "field": "Population",
+              "type": "quantitative",
+              "title": "Population"
+            }
+          }
+        },
+        {
+          "mark": "circle",
+
+          "encoding": {
+            "x": {
+              "field": "Year",
+              "type": "ordinal",
+              "title": "Year"
+            },
+            "y": {
+              "field": "Population",
+              "type": "quantitative",
+              "title": "Population"
+            },
+            "size": {
+              "value": 200
+            },
+            "tooltip": [
+              {
+                "field": "Year",
+                "type": "quantitative"
+              },
+              {
+                "field": "Population",
+                "type": "quantitative",
+                "title": "Population of Melbourne",
+                "format": ".3s"
+              }
+            ]
+          }
         }
-      },
-      "color": {
-        "field": "Transport Type",
-        "type": "nominal",
-        "title": "Transport Type"
-      },
-      "tooltip": [
-        {"field": "Transport Type", "type": "nominal", "title": "Transport Type"},
-        {"field": "Value", "type": "quantitative", "title": "Monthly Passengers"}
-    ]
+      ]
     }
-  }
+  ]
+}

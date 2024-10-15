@@ -1,4 +1,4 @@
-Year,Month,Month name,Metropolitan train,Metropolitan tram,Metropolitan bus,Regional train,Regional coach,Regional bus
+Year,Month,Month name,Train,Tram,Bus,Regional train,Regional coach,Regional bus
 2018,1,January,16809932.00,15231368.00,7568547.00,1466256.00,116568.00,721229.00
 2018,2,February,19554477.00,16980925.00,10487311.00,1522981.00,103197.00,1118494.00
 2018,3,March,22659010.00,19832126.00,11528895.00,1809774.00,117180.00,1224816.00

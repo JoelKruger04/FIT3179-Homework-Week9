@@ -1,70 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
-  <script src="vega_lite_vis.js"></script>
-  <title>Melbourne Public Transport</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.2.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+    <script src="vega_lite_vis.js"></script>
+    <title>Melbourne Public Transport</title>
 
-  <!-- Import pure.css -->
-  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css"
-    integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Import pure.css -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/purecss@2.0.3/build/pure-min.css"
+      integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ"
+      crossorigin="anonymous"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Google font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <!-- Google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
+      rel="stylesheet"
+    />
 
-  <!-- CSS file -->
-  <link rel="stylesheet" type="text/css" href="styles.css" media="all">
+    <!-- CSS file -->
+    <link rel="stylesheet" type="text/css" href="styles.css" media="all" />
+  </head>
+  <body>
+    <div class="page">
+      <section>
+        <div class="pure-g">
+          <div class="pure-u-1-1">
+            <h1 style="text-align: center">
+              On Track: The Evolution of Trains in Melbourne
+            </h1>
+            <p>By Joel Kruger for FIT3179 Project 2. The information is correct as of October 2024.</p>
+          </div>
+        </div>
 
-</head>
-<body>
-<h1></h1>
+        <!-- Table -->
+        <h2>🚆The Past: Evolution of Rolling Stock</h2>
+        <div class="pure-g">
+          <div class="pure-u-1-1">
+            <table class="train_table">
+              <tr>
+                <th>Train Type</th>
+                <th>Image</th>
+                <th>Lifetime</th>
+                <th>Top Speed</th>
+                <th>Manufacturer(s)</th>
+              </tr>
+              <tr>
+                <td>Hitachi</td>
+                <td><img src="trains/hitachi-train-connex_orig.png" /></td>
+                <td>1972 - 2014</td>
+                <td>116 km/h</td>
+                <td>
+                  Commonwealth Engineering, Martin & King, Bayswater, Somerton,
+                  Newport Workshops
+                </td>
+              </tr>
+              <tr>
+                <td>Comeng</td>
+                <td><img src="trains/edi-metro_orig.png" /></td>
+                <td>1981 - present</td>
+                <td>115 km/h</td>
+                <td>Commonwealth Engineering</td>
+              </tr>
+              <tr>
+                <td>X'Trapolis 100</td>
+                <td><img src="trains/xtrapolis-ptv-new-2_orig.png" /></td>
+                <td>2002 - present</td>
+                <td>143 km/h</td>
+                <td>Alstom</td>
+              </tr>
+              <tr>
+                <td>Siemens Nexas</td>
+                <td><img src="trains/siemens-side-ptv-new-2_orig.png" /></td>
+                <td>2003 - present</td>
+                <td>147 km/h</td>
+                <td>Siemens Transportation Systems</td>
+              </tr>
+              <tr>
+                <td>VLocity (regional train)</td>
+                <td><img src="trains/vlocity-3-purple_orig.png" /></td>
+                <td>2004 - present</td>
+                <td>160 km/h</td>
+                <td>Bombardier Transportation, Alstom</td>
+              </tr>
+            </table>
+          </div>
+          <div class="pure-u-2-5">
+            <h3>Major Rail Projects and Rolling Stock</h3>
+            <p style="padding-top: 5px; padding-right: 15px">
+              Due to the rapid population growth of Melbourne in the past 50 years, the rail network has to evolve to keep up with demand.
+              Although rolling stock has been evolving, with higher capacity trains to become more common, 
+              the last major rail project completed in Melbourne was the City Loop, which opened more than 40 years ago.
+              However, the Metro Tunnel is set to open next year, boosting the capacity of the Pakenham, Cranbourne and Sunbury lines.
+            </p>
+          </div>
+          <div class="pure-u-3-5">
+            <div id="timeline" class="vis-container"></div>
+          </div>
+        </div>
 
-<div class="page">
-<!-- pure grid group -->
-<div class="pure-g">
-<div class="pure-u-1-1">
-<h1>The Future of Public Transport in Melbourne</h1>
-<p>Present, past and future usage of public transport within greater Melbourne</p>
-</div>
-</div>
-<!-- end pure grid group -->
+        <div class="pure-g">
+          <div class="pure-u-1">
+            <h2  style="margin-top: 0px">🚆The Present: The Utility of Trains in 2024</h2>
+          </div>
+          <div class="pure-u-2-5">
+            <p style="padding-top: 20px; padding-right: 15px">
+              Despite the rapid increase of Melbourne's population, the usage of trains, trams and buses is lower than it was in 2019.
+              This is mostly due to changes in the lives of many Melburnians, with work and study now commonly undertaken at home, especially
+              when public transport is found to be inconvenient. Nevertheless, investment in the rail network will always be crucial to reducing road congestion
+              and increase access to essential services.
+            </p>
+          </div>
+          <div class="pure-u-3-5">
+            <div
+              id="bar_chart"
+              class="vis-container"
+              style="padding: 10px"
+            ></div>
+          </div>
 
-<div class="pure-g">
-<div class="pure-u-3-5">
-<div class="description description-left">
-<h2>Types of Public Transport</h2>
-<p>Melbourne has a range of public transport options, including trains, trams, buses, and coaches. Trains connect suburbs to the city, trams help people get around urban areas, and buses serve places not covered by the others. However, public transport usage is still lower than in 2019 because more people are working from home and travel habits have changed. This has led to talks about how to make the system better for today's commuters.</p>
-</div>
-</div>
-<div class="pure-u-2-5">
-<div id="bar_chart" class="vis-container"></div>
-</div>
-</div>
+          <!-- Getting to work -->
+          <div class="pure-u-2-5">
+            <h3>Rethinking the Morning Commute</h3>
+            <p style="padding-right: 15px">Despite the rise of remote work, the majority of Australians still drive themselves to work.
+              Although convenient, this reliance on personal vehicles contributes to traffic congestion and urban pollution.
+              The prioritisation of public transport, along with more flexible work and study arrangements, would allow Australians to reduce their environmental impact,
+              as well as decrease travel times for all.
+            </p>
+          </div>
+          <div class="pure-u-3-5">
+            <div id="multiple_bar_chart" class="vis-container"></div>
+          </div>
 
-<!-- pure grid group -->
-<div class="pure-g">
-<div class="pure-u-4-5">
-<div id="prop_symbol_chart" class="vis-container" style="width: 60.5%;"></div>
-</div>
-<div class="pure-u-1-5">
-<div class="description description-right">
-<h2>Train Stops</h2>
-<p>The map shows the usage of each train station in Melbourne, overlayed in front of the population growth for that region.</p>
-</div>
-</div>
+          <!-- pure grid group -->
+          <div class="pure-u-1">
+            <h2 style="margin-top: 0px">🚆The Future: Population Growth and the Suburban Rail Loop</h2>
+            <div class="row">
+              <div class="column">
+                <p style="padding-right: 20px">
+                  The map shows the average weekday patronage of each
+                  metropolitan train station, overlayed in front of the
+                  population growth for each LGA (local government area). The
+                  high concentation of rail traffic in the inner city is due to
+                  the radial nature of Melbourne's train network and the lack of
+                  any linkages of train lines.
+                </p>
+              </div>
+              <div class="column">
+                <p style="padding-left: 10px">
+                  The concentration of population growth in the CBD (shown in
+                  <span style="color: blue">blue</span>) highlights the
+                  concentration of Melbourne's economic activity in the inner
+                  city. The proposed Suburban Rail Loop (stations in
+                  <span style="color: orange">orange</span>) aims to alleviate
+                  this flaw by allowing travellers to travel around the city and
+                  avoid the CBD, while creating economic hubs that are easily
+                  accessible
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="pure-u-1">
+            <div id="prop_symbol_chart" class="vis-container"></div>
+          </div>
+        </div>
 
-</div>
-<!-- end pure grid group -->
-
-</div>
-
-</body>
+        Sources: ABS (LGA boundaries, population change, Australia's journey to
+        work), DATA VIC (public transport patronage, train station data), VICSIG (train data), Macrotrends (Melbourne population). Train
+        pictures from Melbourne's Public Transport Gallery
+      </section>
+    </div>
+  </body>
 </html>

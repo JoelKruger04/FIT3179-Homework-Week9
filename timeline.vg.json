@@ -1,0 +1,154 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "A timeline visualization of the lives of the first five U.S. presidents.",
+  "width": 550,
+  "height": 100,
+  "padding": 50,
+
+  "data": [
+    {
+      "name": "people",
+      "values": [
+        {
+          "label": "Harris",
+          "born": -441885600000,
+          "died": 567954000000,
+          "years": "1956 - 1988"
+        },
+        {
+          "label": "Comeng",
+          "born": 347115600000,
+          "died": 1767186000000,
+          "years": "1981 - present"
+        },
+        {
+          "label": "X'Trapolis",
+          "born": 1009803600000,
+          "died": 1767186000000,
+          "years": "2002 - present"
+        },
+        {
+          "label": "Siemens",
+          "born": 1041339600000,
+          "died": 1767186000000,
+          "years": "2003 - present"
+        },
+        {
+          "label": "HCMT",
+          "born": 1577797200000,
+          "died": 1767186000000,
+          "years": "2020 - present"
+        },
+        {
+          "label": "X'Trapolis 2.0",
+          "born": 1735650000000,
+          "died": 1767186000000,
+          "years": "2025 (estimated)"
+        }
+      ]
+    },
+    {
+      "name": "events",
+      "format": { "type": "json", "parse": { "when": "date" } },
+      "values": [
+        { "name": "City Loop construction begins", "when": "1971", "desc": "The city loop..." },
+        {
+          "name": "St Kilda and Port Melbourne lines converted",
+          "when": "1987"
+        },
+        { "name": "City Loop opens", "when": "1981" },
+        { "name": "Metlink founded", "when": "2003" },
+        { "name": "PTV replaces Metlink", "when": "2012" },
+        { "name": "Region rail link completed", "when": "2015" },
+        { "name": "Metro tunnel construction begins", "when": "2018" },
+        { "name": "Metro tunnel completion", "when": "2025" }
+      ]
+    }
+  ],
+
+  "scales": [
+    {
+      "name": "yscale",
+      "type": "band",
+      "range": [0, { "signal": "height" }],
+      "domain": { "data": "people", "field": "label" }
+    },
+    {
+      "name": "xscale",
+      "type": "time",
+      "range": "width",
+      "round": true,
+      "domain": { "data": "people", "fields": ["born", "died"] }
+    }
+  ],
+
+  "axes": [{ "orient": "bottom", "scale": "xscale", "format": "%Y", "title": "Year" }],
+
+  "marks": [
+    {
+      "type": "text",
+      "from": { "data": "events" },
+      "encode": {
+        "enter": {
+          "x": { "scale": "xscale", "field": "when" },
+          "y": { "value": -10 },
+          "angle": { "value": -25 },
+          "fill": { "value": "#000" },
+          "text": { "field": "name" },
+          "fontSize": { "value": 10 }
+        },
+        "tooltip": {
+            "field": "desc",
+            "type": "nominal"
+        }
+      }
+    },
+    {
+      "type": "rect",
+      "from": { "data": "events" },
+      "encode": {
+        "enter": {
+          "x": { "scale": "xscale", "field": "when" },
+          "y": { "value": -8 },
+          "width": { "value": 1 },
+          "height": { "field": { "group": "height" }, "offset": 8 },
+          "fill": { "value": "#888" }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": { "data": "people" },
+      "encode": {
+        "enter": {
+          "x": { "scale": "xscale", "field": "born" },
+          "y": { "scale": "yscale", "field": "label", "offset": -3 },
+          "fill": { "value": "#000" },
+          "text": { "field": "label" },
+          "fontSize": { "value": 10 },
+          "fontStyle": { "value": "bold" }
+        }
+      }
+    },
+    {
+      "type": "rect",
+      "from": { "data": "people" },
+      "encode": {
+        "enter": {
+          "x": { "scale": "xscale", "field": "born" },
+          "x2": { "scale": "xscale", "field": "died" },
+          "y": { "scale": "yscale", "field": "label" },
+          "height": { "value": 5 },
+          "fill": { "value": "#4C78A8" },
+          "tooltip": [
+            {
+              "field": "years",
+              "type": "nominal",
+              "title": "Years"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
